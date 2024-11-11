@@ -9,9 +9,9 @@ class Usuarios_model extends CI_Model {
         $query = $this->db->get();
         return $query->row_array();
     }
-    public function check_login($usuarios, $password){
+    public function check_login($usuario, $password){
         $this->db->select("usuario_id");
-        $this->db->where("usuario",$usuarios);
+        $this->db->where("usuario",$usuario);
         $this->db->where("password", md5($password));
         $query = $this->db->get("usuarios");
         if ($query->num_rows() > 0) {

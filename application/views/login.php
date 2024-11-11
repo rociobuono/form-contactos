@@ -21,13 +21,6 @@
                 </div>
                 <?php
                 break;
-            case "PROHIBIDO":
-                ?>
-                <div class="alert alert-danger" role="alert">
-                    Primero ingrese sesión.
-                </div>
-                <?php
-                break;
             case "INCORRECTO":
                 ?>
                 <div class="alert alert-danger" role="alert">

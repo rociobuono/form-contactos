@@ -23,12 +23,20 @@ class Auth extends CI_Controller
             if ($uid = $this->usuarios_model->check_login($usuario, $password)) {
                 $u = $this->usuarios_model->get_by_id($uid);
                 $this->session->set_userdata("usuario", $u["usuario"]);
-                    $this->session->set_userdata("rol_id", $u["rol_id"]);
-                    redirect('contactos');
+                $this->session->set_userdata("usuario_id", $u["usuario_id"]);
+                $this->session->set_userdata("rol_id", $u["rol_id"]);
+                redirect('contactos');
             } else {
                 $this->session->set_flashdata("OP", "INCORRECTO");
                 redirect('auth/login');
             }
         }
+        
+    }
+
+    public function logout(){   
+        $this->session->sess_destroy();
+        $this->session->set_flashdata("OP", "SALIO");
+        redirect('auth/login');
     }
 }

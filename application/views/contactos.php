@@ -11,59 +11,92 @@
 </head>
 
 <body>
-    <class class="container">
-        <class class="row">
-            <class class="col-md-6 offset-md-3">
+<?php
+    $this->load->view("navbar");
+    if ($this->session->flashdata("OP")) {
+        switch ($this->session->flashdata("OP")) {
+            case "BORRADO":
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    Contacto Eliminado.
+                </div>
+                <?php
+                break;
+            case "OK":
+                ?>
+                <div class="alert alert-success" role="alert">
+                    Contacto Agregado.
+                </div>
+                <?php
+                break;
+        }
+    }
+
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
                 <h1>Contactos</h1>
-                <class class="card">
-                    <class class="card-body">
+                <div class="card">
+                    <div class="card-body">
                         <form method="post" action="<?php echo site_url("contactos/nuevo"); ?>">
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido">
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="text" class="form-control" id="correo" name="correo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Telefono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label for="correo" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="correo" name="correo">
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-                    </class>
-                </class>
-                
-            </class>
-            <class class="col-md-6 offset-md-3">
+                </div>
+
+            </div>
+            <div class="col-md-6 offset-md-3">
                 <br>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </class>
-        </class>
-    </class>
+                <?php if (count($contactos)) { ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($contactos as $c) { ?>
+                                <tr>
+                                    <td><?php echo $c["apellido"] ?></td>
+                                    <td><?php echo $c["nombre"] ?></td>
+                                    <td><?php echo $c["telefono"] ?></td>
+                                    <td><?php echo $c["correo"] ?></td>
+                                    <td><a href="<?php echo site_url("contactos/borrar/").$c["contacto_id"]?>"><i class="bi bi-trash"></i></a></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <div class="alert alert-primary" role="alert">
+                        No hay contactos.
+                    </div>
+
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

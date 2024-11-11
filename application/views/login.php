@@ -40,6 +40,7 @@
                 <br>
                 <class class="card">
                     <class class="card-body">
+                        <?php echo validation_errors("<p>", "</p>"); ?>
                         <form method="post" action="<?php echo site_url("auth/login"); ?>">
                             <div class="mb-3">
                                 <label for="usuario" class="form-label">Usuario</label>

@@ -38,6 +38,7 @@
             <div class="col-md-6 offset-md-3">
                 <h1>Contactos</h1>
                 <div class="card">
+                    <?php echo validation_errors("<p>", "</p>")?>
                     <div class="card-body">
                         <form method="post" action="<?php echo site_url("contactos/nuevo"); ?>">
                             <div class="mb-3">
